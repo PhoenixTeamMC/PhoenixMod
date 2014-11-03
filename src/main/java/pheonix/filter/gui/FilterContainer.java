@@ -2,6 +2,7 @@ package pheonix.filter.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
 import pheonix.filter.TileEntityFilter;
 
 public class FilterContainer extends Container{
@@ -11,7 +12,7 @@ public class FilterContainer extends Container{
 	public FilterContainer(TileEntityFilter filter){
 		this.filter = filter;
 		
-		
+		this.addSlotToContainer(new Slot(filter, 0, 42, 34));
 	}
 	
 	@Override

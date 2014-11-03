@@ -15,7 +15,8 @@ public class FilterGui extends GuiContainer{
 	public FilterGui(Container container) {
 		super(container);
 		
-		
+		this.xSize = 246;
+		this.ySize = 164;
 	}
 
 	@Override

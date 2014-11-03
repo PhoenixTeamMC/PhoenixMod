@@ -24,7 +24,11 @@ public class TileEntityFilter extends TileEntity implements IInventory{
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return inventory[slot];
+		try {
+			return inventory[slot];
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override
