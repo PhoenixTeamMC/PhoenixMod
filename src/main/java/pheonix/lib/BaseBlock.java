@@ -17,7 +17,7 @@ public class BaseBlock extends Block
 
 		this.setCreativeTab(PheonixMod.creativeTab);
 		this.setBlockName(blockName);
-		this.setBlockTextureName("RandomThings:" + blockName);
+		this.setBlockTextureName("PheonixMod:" + blockName);
 
 		GameRegistry.registerBlock(this, blockName);
 	}
@@ -29,7 +29,7 @@ public class BaseBlock extends Block
 
 		this.setCreativeTab(PheonixMod.creativeTab);
 		this.setBlockName(blockName);
-		this.setBlockTextureName("RandomThings:" + blockName);
+		this.setBlockTextureName("PheonixMod:" + blockName);
 
 		GameRegistry.registerBlock(this, itemBlock, blockName);
 	}
