@@ -15,8 +15,8 @@ public class FilterGui extends GuiContainer{
 	public FilterGui(Container container) {
 		super(container);
 		
-		this.xSize = 246;
-		this.ySize = 164;
+		this.xSize = 184;
+		this.ySize = 183;
 	}
 
 	@Override
@@ -30,6 +30,9 @@ public class FilterGui extends GuiContainer{
 		mc.renderEngine.bindTexture(texture);
 	}
 	
+	public void onMouseClicked(){
+		
+	}
 	
 
 }

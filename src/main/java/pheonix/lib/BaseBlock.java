@@ -14,9 +14,9 @@ public class BaseBlock extends Block
 	{
 		super(material);
 		this.blockName = blockName;
-
+		
 		this.setCreativeTab(PheonixMod.creativeTab);
-		this.setBlockName(blockName);
+		this.setBlockName("pheonix." + blockName);
 		this.setBlockTextureName("PheonixMod:" + blockName);
 
 		GameRegistry.registerBlock(this, blockName);
@@ -28,7 +28,7 @@ public class BaseBlock extends Block
 		this.blockName = blockName;
 
 		this.setCreativeTab(PheonixMod.creativeTab);
-		this.setBlockName(blockName);
+		this.setBlockName("pheonix." + blockName);
 		this.setBlockTextureName("PheonixMod:" + blockName);
 
 		GameRegistry.registerBlock(this, itemBlock, blockName);

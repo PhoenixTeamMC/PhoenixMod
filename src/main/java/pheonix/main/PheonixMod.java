@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import pheonix.filter.Filter;
 import pheonix.lib.GuiHandler;
 import pheonix.main.lib.Reference;
+import pheonix.rp.Renascintis;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -25,6 +26,7 @@ public class PheonixMod {
 	
 	static{ //Use this to add a module.
 		modules.put(new Filter(), true);
+		modules.put(new Renascintis(), true);
 	}
 	
 	Configuration config;

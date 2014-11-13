@@ -1,16 +1,21 @@
 package pheonix.filter;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 
 public class TileEntityFilter extends TileEntity implements IInventory{
 
 	public ItemStack[] inventory;
 
 	public ItemStack[] filters;
-
+	
 	public TileEntityFilter(){
 		inventory = new ItemStack[6];
 
@@ -24,29 +29,59 @@ public class TileEntityFilter extends TileEntity implements IInventory{
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		try {
+		if(slot < 6){
 			return inventory[slot];
-		} catch (Exception e) {
-			return null;
+			
+		}else{
+			return filters[slot - 6];
 		}
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slotIndex, int decrementAmount)
+	public void setInventorySlotContents(int slot, ItemStack itemStack)
 	{
-		ItemStack itemStack = getStackInSlot(slotIndex);
+
+		if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit())
+		{
+			itemStack.stackSize = this.getInventoryStackLimit();
+		}
+
+		if(slot < 6){
+			inventory[slot] = itemStack;
+			
+		}else{
+			
+			filters[slot - 6] = itemStack;
+		}
+		
+		this.markDirty();
+		
+		World world = this.getWorldObj();
+		
+		Block block = world.getBlock(xCoord, yCoord, zCoord);
+		if(!world.isRemote){
+			world.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, block);
+		}
+		
+	}
+
+	
+	@Override
+	public ItemStack decrStackSize(int slot, int decrementAmount)
+	{
+		ItemStack itemStack = getStackInSlot(slot);
 		if (itemStack != null)
 		{
 			if (itemStack.stackSize <= decrementAmount)
 			{
-				setInventorySlotContents(slotIndex, null);
+				setInventorySlotContents(slot, null);
 			}
 			else
 			{
 				itemStack = itemStack.splitStack(decrementAmount);
 				if (itemStack.stackSize == 0)
 				{
-					setInventorySlotContents(slotIndex, null);
+					setInventorySlotContents(slot, null);
 				}
 			}
 		}
@@ -55,12 +90,13 @@ public class TileEntityFilter extends TileEntity implements IInventory{
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slotIndex)
+	public ItemStack getStackInSlotOnClosing(int slot)
 	{
-		if (inventory[slotIndex] != null)
+		
+		if (this.getStackInSlot(slot) != null)
 		{
-			ItemStack itemStack = inventory[slotIndex];
-			inventory[slotIndex] = null;
+			ItemStack itemStack = this.getStackInSlot(slot);
+			this.setInventorySlotContents(slot, null);
 			return itemStack;
 		}
 		else
@@ -69,20 +105,16 @@ public class TileEntityFilter extends TileEntity implements IInventory{
 		}
 	}
 
-	@Override
-	public void setInventorySlotContents(int slotIndex, ItemStack itemStack)
-	{
-		inventory[slotIndex] = itemStack;
-
-		if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit())
-		{
-			itemStack.stackSize = this.getInventoryStackLimit();
+	
+	public ItemStack[] getInventoryForSlot(int slot){
+		if(slot < 6){
+			return inventory;
+			
+		}else{
+			return filters;
 		}
-
-
-		this.markDirty();
 	}
-
+	
 	@Override
 	public String getInventoryName() {
 		return "filter";
@@ -95,7 +127,7 @@ public class TileEntityFilter extends TileEntity implements IInventory{
 
 	@Override
 	public int getInventoryStackLimit() {
-		return 1;
+		return 64;
 	}
 
 	@Override
@@ -112,6 +144,70 @@ public class TileEntityFilter extends TileEntity implements IInventory{
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		return true;
+	}
+	
+	/**
+	 * Reads the inventory from nbt
+	 */
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+
+		super.readFromNBT(nbt);
+
+		NBTTagList list = nbt.getTagList("Inventory", Constants.NBT.TAG_COMPOUND);
+		this.inventory = new ItemStack[this.inventory.length];
+		for (int i = 0; i < list.tagCount(); i++) {
+			NBTTagCompound tag = list.getCompoundTagAt(i);
+			int slot = tag.getInteger("Slot");
+
+			if ((slot >= 0) && (slot < this.inventory.length)) {
+				this.inventory[slot] = ItemStack.loadItemStackFromNBT(tag);
+			}
+		}
+		
+		NBTTagList list2 = nbt.getTagList("Filters", Constants.NBT.TAG_COMPOUND);
+		this.filters = new ItemStack[this.filters.length];
+		for (int i = 0; i < list2.tagCount(); i++) {
+			NBTTagCompound tag = list2.getCompoundTagAt(i);
+			int slot = tag.getInteger("Slot");
+
+			if ((slot >= 0) && (slot < this.inventory.length)) {
+				this.filters[slot] = ItemStack.loadItemStackFromNBT(tag);
+			}
+		}
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+
+		super.writeToNBT(nbt);
+
+		if (this.inventory.length <= 0) {
+			return;
+		}
+		NBTTagList list = new NBTTagList();
+		for (int i = 0; i < this.inventory.length; i++) {
+			if (this.inventory[i] != null) {
+				NBTTagCompound tag = new NBTTagCompound();
+				tag.setInteger("Slot", i);
+				this.inventory[i].writeToNBT(tag);
+				list.appendTag(tag);
+			}
+		}
+		nbt.setTag("Inventory", list);
+		
+		NBTTagList list2 = new NBTTagList();
+		for (int i = 0; i < this.filters.length; i++) {
+			if (this.filters[i] != null) {
+				NBTTagCompound tag = new NBTTagCompound();
+				tag.setInteger("Slot", i);
+				this.filters[i].writeToNBT(tag);
+				list2.appendTag(tag);
+			}
+		}
+		nbt.setTag("Filters", list2);
+		
+		
 	}
 
 }

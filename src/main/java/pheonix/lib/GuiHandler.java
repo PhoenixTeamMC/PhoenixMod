@@ -15,12 +15,12 @@ public class GuiHandler implements IGuiHandler
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		return new FilterContainer((TileEntityFilter) world.getTileEntity(x, y, z));
+		return new FilterContainer(player, (TileEntityFilter) world.getTileEntity(x, y, z));
 	}
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		return new FilterGui(new FilterContainer((TileEntityFilter) world.getTileEntity(x, y, z)));
+		return new FilterGui(new FilterContainer(player, (TileEntityFilter) world.getTileEntity(x, y, z)));
 	}
 }
