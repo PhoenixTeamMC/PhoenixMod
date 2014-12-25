@@ -7,6 +7,7 @@ import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.Logger;
 
+import pheonix.command.CommandInit;
 import pheonix.filter.Filter;
 import pheonix.lib.GuiHandler;
 import pheonix.main.lib.Reference;
@@ -27,6 +28,7 @@ public class PheonixMod {
 	static{ //Use this to add a module.
 		modules.put(new Filter(), true);
 		modules.put(new Renascintis(), true);
+		modules.put(new CommandInit(), true);
 	}
 	
 	Configuration config;
