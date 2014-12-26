@@ -1,7 +1,9 @@
 package pheonix.command;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.minecraft.command.ICommandSender;
@@ -24,7 +26,7 @@ public class CommandInit implements IIntializer{
 
 	public static Configuration config;
 	
-	Map<String, String> eventList = new HashMap<String, String>();
+	Map<String, List<String>> eventList = new HashMap<String, List<String>>();
 	
 	@Override
 	public String getModuleName() {
@@ -48,11 +50,26 @@ public class CommandInit implements IIntializer{
 			}
 			
 			String[] parameters = str.split(":");
+			
 			if(parameters.length != 2){
 				throw new RuntimeException(String.format("Command %s is malfigured in the eventCommand.cfg file. Please fix.", str));
 			}
 			
-			eventList.put(parameters[0].toLowerCase(), parameters[1]);
+			String key = parameters[0].toLowerCase();
+			
+			if(parameters[1] == null){
+				return;
+			}
+			
+			if(eventList.containsKey(key)){
+				eventList.get(key).add(parameters[1]);
+			}else{
+				
+				List<String> list = new ArrayList<String>();
+				list.add(parameters[1]);
+				
+				eventList.put(key, list);
+			}
 		}
 		
 		config.save();
@@ -72,13 +89,17 @@ public class CommandInit implements IIntializer{
 	public void onLivingDeathEvent(LivingEvent e){
 		if(!e.entity.worldObj.isRemote && e.entity instanceof EntityPlayer){
 			
-			String name = eventList.get(e.getClass().getSimpleName().toLowerCase());
+			List<String> name = eventList.get(e.getClass().getSimpleName().toLowerCase());
 			
 			if(name == null){
 				return;
 			}
 			
-			MinecraftServer.getServer().getCommandManager().executeCommand(new CommandSender((EntityPlayer) e.entity), name);
+			for(String str : name){
+				MinecraftServer.getServer().getCommandManager().executeCommand(new CommandSender((EntityPlayer) e.entity), str);
+			}
+			
+			
 		}
 	}
 

@@ -47,6 +47,8 @@ public class PheonixMod {
 		
 		config = new Configuration(event.getSuggestedConfigurationFile());
 		
+		config.load();
+		
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		
 		for(IIntializer module : modules.keySet()){
@@ -60,6 +62,8 @@ public class PheonixMod {
 			modules.put(module, shouldInit);
 			
 		}
+		
+		config.save();
 		
     }
     
