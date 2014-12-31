@@ -41,7 +41,7 @@ public class CommandInit implements IIntializer{
 		
 		config.load();
 		
-		String[] commands = config.getStringList("eventList", "commands", new String[0], "Category is formatted such that the line is this \"EventName:Command\". An example would be: LivingDeathEvent:say I am dead");
+		String[] commands = config.getStringList("eventList", "commands", new String[0], "Category is formatted such that the line is this \"EventName:Command\". An example would be: LivingDeathEvent:say I am dead. List of Events here:http://goo.gl/ol6J1f");
 		
 		for(String str : commands){
 			
