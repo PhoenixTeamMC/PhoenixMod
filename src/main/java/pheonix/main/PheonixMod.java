@@ -11,6 +11,7 @@ import pheonix.command.CommandInit;
 import pheonix.filter.Filter;
 import pheonix.lib.GuiHandler;
 import pheonix.main.lib.Reference;
+import pheonix.rain.RainInit;
 import pheonix.rp.Renascintis;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -29,6 +30,7 @@ public class PheonixMod {
 		modules.put(new Filter(), true);
 		modules.put(new Renascintis(), true);
 		modules.put(new CommandInit(), true);
+		modules.put(new RainInit(), true);
 	}
 	
 	Configuration config;
