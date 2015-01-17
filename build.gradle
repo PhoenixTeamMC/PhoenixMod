@@ -22,7 +22,8 @@ group= "phoenix.PheonixMod"
 archivesBaseName = "PheonixMod"
 
 minecraft {
-    version = "1.7.10-10.13.0.1205"
+    version = "1.7.10-10.13.0.1230”
+
     if(file('../run').exists()){
      assetDir = "../run/assets"
     } else {
