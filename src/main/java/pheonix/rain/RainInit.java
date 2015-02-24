@@ -40,7 +40,7 @@ public class RainInit implements IIntializer{
 					field.setAccessible(true);
 					field.set(base, true);
 				}else{
-					Field field = BiomeGenBase.class.getDeclaredField("ax");
+					Field field = BiomeGenBase.class.getDeclaredField("field_76765_S");
 					field.setAccessible(true);
 					field.set(base, true);
 				}
