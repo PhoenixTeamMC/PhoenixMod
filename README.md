@@ -1,4 +1,4 @@
-The Pheonix Team Mod
+The Phoenix Team Mod
 ==============
 
 A Minecraft mod for the various endavours of the Pheonix Team. 
