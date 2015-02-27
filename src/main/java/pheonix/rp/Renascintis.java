@@ -1,5 +1,6 @@
 package pheonix.rp;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -7,12 +8,21 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import pheonix.lib.item.ItemBase;
 import pheonix.main.IIntializer;
 import pheonix.main.PheonixMod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import pheonix.rp.handler.ConfigurationHandler;
+import pheonix.rp.handler.LivingHandler;
+import pheonix.rp.items.ItemHandler;
+import pheonix.rp.potion.PotionHandler;
+import pheonix.rp.reference.ConfigSettings;
+import pheonix.rp.reference.Reference;
+
+import java.io.File;
 
 public class Renascintis implements IIntializer{
 
@@ -23,6 +33,17 @@ public class Renascintis implements IIntializer{
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
+		ConfigurationHandler.init(new File(event.getModConfigurationDirectory(), getModuleName()+".cfg"));
+		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
+
+		for (int i = 0; i < ConfigSettings.types.length && i < ConfigSettings.playerList.length; i++)
+		{
+			Reference.godMap.put(ConfigSettings.types[i], ConfigSettings.playerList[i]);
+		}
+
+		ItemHandler.init();
+		PotionHandler.init();
+
 		itemMaterial = (ItemRP) new ItemRP().setUnlocalizedName("orb").setCreativeTab(PheonixMod.creativeTab);
 		
 		itemMaterial.addItem(0, "sol");
@@ -31,14 +52,12 @@ public class Renascintis implements IIntializer{
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-		// TODO Auto-generated method stub
-		
+		MinecraftForge.EVENT_BUS.register(new LivingHandler());
 	}
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	ItemRP itemMaterial;
@@ -58,7 +77,7 @@ public class Renascintis implements IIntializer{
 		@Override
 		public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 			
-			if(world.isRemote == false){
+			if(!world.isRemote){
 				String name = super.getRawName(stack);
 				
 				if(name.equals("sol")){
@@ -79,7 +98,6 @@ public class Renascintis implements IIntializer{
 		public boolean hasEffect(ItemStack par1ItemStack, int pass) {
 			return true;
 		}
-		
 		
 	}
 	
