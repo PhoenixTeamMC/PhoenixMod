@@ -1,0 +1,10 @@
+#en_US
+tile.phoenixmod.filter.name=Filter
+item.phoenixmod.orb.sol.name=Solis Aeterna
+item.phoenixmod.orb.luna.name=Aurora Luna
+item.phoenixmod:lightningWand.name=The Wand of Lightning
+item.phoenixmod:ghastWand.name=The Wand of Fire
+item.phoenixmod:apocalypse.name=The Apocalypse
+item.phoenixmod:genesis.name=The Genesis
+
+info.phoenix.whisper=You hear a faint whisper:
