@@ -6,5 +6,9 @@ item.phoenixmod:lightningWand.name=The Wand of Lightning
 item.phoenixmod:ghastWand.name=The Wand of Fire
 item.phoenixmod:apocalypse.name=The Apocalypse
 item.phoenixmod:genesis.name=The Genesis
+item.renascintis:lightningWand.name=The Wand of Lightning
+item.renascintis:ghastWand.name=The Wand of Fire
+item.renascintis:apocalypse.name=The Apocalypse
+item.renascintis:genesis.name=The Genesis
 
 info.phoenix.whisper=You hear a faint whisper:
