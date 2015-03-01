@@ -5,3 +5,6 @@ run
 .classpath
 .settings
 *.db
+*.iml
+*.ipr
+*.iws
