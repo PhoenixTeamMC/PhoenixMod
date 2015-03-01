@@ -18,8 +18,8 @@ buildscript {
 apply plugin: 'forge'
 
 version = "1.7.10-0.0.2"
-group= "phoenix.PheonixMod"
-archivesBaseName = "PheonixMod"
+group= "phoenix.phoenixmod"
+archivesBaseName = "PhoenixMod"
 
 minecraft {
     version = "1.7.10-10.13.2.1230"
