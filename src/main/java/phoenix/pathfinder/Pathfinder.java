@@ -36,7 +36,7 @@ public class Pathfinder implements IIntializer {
 		// TODO Auto-generated method stub
 	}
 
-	private class PathHandler {
+	public class PathHandler {
 
 		public HashMap<Long, Boolean> not_done = new HashMap<Long, Boolean>();
 
