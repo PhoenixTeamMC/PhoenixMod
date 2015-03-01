@@ -38,7 +38,7 @@ public class Pathfinder implements IIntializer {
 
 	private class PathHandler {
 
-		private HashMap<Long, Boolean> not_done = new HashMap<Long, Boolean>();
+		public HashMap<Long, Boolean> not_done = new HashMap<Long, Boolean>();
 
 		@SubscribeEvent
 		public final void onLogin(EntityJoinWorldEvent e) {
