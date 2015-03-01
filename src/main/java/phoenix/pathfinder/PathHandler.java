@@ -6,6 +6,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import phoenix.util.ReflectionUtil;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -23,9 +24,11 @@ public class PathHandler {
 			} else {
 				return new HashMap<Long, Boolean>();
 			}
-		} catch(IOException i) {
-			return new HashMap<Long, Boolean>();
 		} catch(ClassNotFoundException c) {
+			return new HashMap<Long, Boolean>();
+		} catch(FileNotFoundException f) {
+			return new HashMap<Long, Boolean>();
+		} catch (IOException e) {
 			return new HashMap<Long, Boolean>();
 		}
 	}
