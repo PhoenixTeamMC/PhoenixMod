@@ -2,11 +2,7 @@ package phoenix.pathfinder;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import phoenix.util.ReflectionUtil;
 
 import java.io.FileInputStream;
@@ -17,23 +13,7 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 public class PathHandler {
-
-	static {
-		try
-		{
-			FileInputStream fileIn = new FileInputStream("/pathfinder/not_done.ser");
-			ObjectInputStream in = new ObjectInputStream(fileIn);
-			HashMap<Long, Boolean> hash = (HashMap<Long, Boolean>) in.readObject();
-			in.close();
-			fileIn.close();
-			if (hash == null) { HashMap<Long, Boolean> not_done = new HashMap<Long, Boolean>();}
-		}catch(IOException i)
-		{
-			HashMap<Long, Boolean> not_done = new HashMap<Long, Boolean>();		}catch(ClassNotFoundException c)
-		{
-			HashMap<Long, Boolean> not_done = new HashMap<Long, Boolean>();		}
-	}
-
+	
 	private HashMap<Long, Boolean> getNot_Done() {
 		try {
 			FileInputStream fileIn = new FileInputStream("/pathfinder/not_done.ser");
@@ -72,16 +52,6 @@ public class PathHandler {
 			} catch(IOException i)
 			{
 				i.printStackTrace();
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public final void onUpdate(LivingEvent.LivingUpdateEvent event) {
-		if (event.entity instanceof EntityPlayer) {
-			if (Minecraft.getMinecraft().gameSettings.difficulty != EnumDifficulty.PEACEFUL) {
-				Minecraft.getMinecraft().gameSettings.difficulty = EnumDifficulty.PEACEFUL;
-				Minecraft.getMinecraft().gameSettings.saveOptions();
 			}
 		}
 	}
