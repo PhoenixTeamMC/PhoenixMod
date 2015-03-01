@@ -9,3 +9,9 @@ run
 *.ipr
 *.iws
 out
+saves/
+resourcepacks/
+mods/
+config/
+usernamecache.json
+logs/

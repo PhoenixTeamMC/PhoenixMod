@@ -13,19 +13,19 @@ public class Pathfinder implements IIntializer {
 		return "Pathfinder";
 	}
 
-	@Override
-	public void preInit(FMLPreInitializationEvent event) {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public void preInit(FMLPreInitializationEvent event) {
 
-	@Override
+    }
+
+    @Override
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new PathHandler());
 	}
 
-	@Override
-	public void postInit(FMLPostInitializationEvent event) {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public void postInit(FMLPostInitializationEvent event) {
+
+    }
 }
 
