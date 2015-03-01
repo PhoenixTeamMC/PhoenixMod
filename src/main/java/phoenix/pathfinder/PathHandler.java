@@ -13,7 +13,6 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 public class PathHandler {
-
 	private HashMap<Long, Boolean> getNot_Done() {
 		try {
 			FileInputStream fileIn = new FileInputStream("/pathfinder/not_done.ser");
