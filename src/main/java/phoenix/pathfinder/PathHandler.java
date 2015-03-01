@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import phoenix.util.ReflectionUtil;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -56,7 +57,7 @@ public class PathHandler {
 		FMLLog.info("[PathFinder] onLogin triggered");
 		if (identifier == null || identifier) {
 			long was = e.world.getSeed();
-			e.world.setRandomSeed((int )(Math. random() * 100 + 1), (int )(Math. random() * 100 + 1), (int )(Math. random() * 100 + 1));
+			ReflectionUtil.changeFieldFromObj(e.world.getWorldInfo(), "randomSeed", (long) (Math.random() * 10000 + 1));
 			long seed = e.world.getSeed();
 			getNot_Done().put(seed, false);
 			FMLLog.info("[PathFinder] randomized seed. Seed was: " + was + ". Seed is now: " + seed);
