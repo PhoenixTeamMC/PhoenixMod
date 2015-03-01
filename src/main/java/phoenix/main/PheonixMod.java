@@ -11,6 +11,7 @@ import phoenix.command.CommandInit;
 import phoenix.filter.Filter;
 import phoenix.lib.GuiHandler;
 import phoenix.main.lib.Reference;
+import phoenix.pathfinder.Pathfinder;
 import phoenix.rain.RainInit;
 import phoenix.rp.Renascintis;
 import cpw.mods.fml.common.Mod;
@@ -31,6 +32,7 @@ public class PheonixMod {
 		modules.put(new Renascintis(), true);
 		modules.put(new CommandInit(), true);
 		modules.put(new RainInit(), true);
+		modules.put(new Pathfinder(), true);
 	}
 	
 	Configuration config;
