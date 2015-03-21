@@ -10,5 +10,8 @@ item.renascintis:lightningWand.name=The Wand of Lightning
 item.renascintis:ghastWand.name=The Wand of Fire
 item.renascintis:apocalypse.name=The Apocalypse
 item.renascintis:genesis.name=The Genesis
+item.renascintis:libratumArcus.name=Libratum Arcus
+
+info.renascintis.youAreNotWorthy=This divine weapon is unwieldy in your mortal hands
 
 info.phoenix.whisper=You hear a faint whisper:

@@ -1,8 +1,10 @@
 package phoenix.rp.utility;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -18,8 +20,7 @@ public class DivinityHelper {
     }
 
     /** gets the faction of a god, if the player is not a god, returns null */
-    public static String getFaction(EntityPlayer player)
-    {
+    public static String getFaction(EntityPlayer player) {
         if(!isGod(player)) {
             return null;
         }
@@ -27,7 +28,7 @@ public class DivinityHelper {
     }
 
     /** invokes lightning on the given position */
-    public static void spawnLightningAt(World world, double x, double y, double z){
+    public static void spawnLightningAt(World world, double x, double y, double z) {
         world.playSoundEffect(x, y, z,"ambient.weather.thunder", 10000.0F, 0.8F);
         world.playSoundEffect(x, y, z,"random.explode", 10000.0F, 0.8F);
         world.spawnEntityInWorld(new EntityLightningBolt(world, x, y, z));
@@ -39,4 +40,21 @@ public class DivinityHelper {
         target.onDeath(DamageSource.causePlayerDamage(attacker));
         target.setDead();
     }
+
+    /** enchants an item if it is wielded by a god */
+    public static void enchantWeapon(ItemStack stack, EntityPlayer player, Enchantment enchantment, int lvl) {
+        if(isGod(player)) {
+            // Weapon is enchanted in the hands of a god
+            if(!stack.isItemEnchanted()) {
+                stack.addEnchantment(enchantment, lvl);
+            }
+        }
+        else {
+            //Weapon does nothing for a mortal
+            if(stack.isItemEnchanted()) {
+                stack.stackTagCompound = null;
+            }
+        }
+    }
+
 }

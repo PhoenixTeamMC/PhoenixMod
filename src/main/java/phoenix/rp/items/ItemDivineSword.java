@@ -97,7 +97,7 @@ public class ItemDivineSword extends ItemSword {
             DivinityHelper.spawnLightningAt(azttacker.getEntityWorld(), attacker.posX, attacker.posY, attacker.posZ);
             attacker.dropOneItem(true);
             */
-            attacker.addChatComponentMessage(new ChatComponentText("Phoenix.PR.youAreNotWorthy"));
+            attacker.addChatComponentMessage(new ChatComponentText("info.renascintis.youAreNotWorthy"));
         }
         return true;
     }
@@ -106,11 +106,8 @@ public class ItemDivineSword extends ItemSword {
     public void onUpdate(ItemStack stack, World world, Entity entity, int nr, boolean flag) {
         if(entity !=null && entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
+            DivinityHelper.enchantWeapon(stack, player, Enchantment.sharpness, 5);
             if(DivinityHelper.isGod(player)) {
-                // Weapon is enchanted in the hands of a god
-                if(!stack.isItemEnchanted()) {
-                    stack.addEnchantment(Enchantment.sharpness, 5);
-                }
                 //Check if the god is swinging his sword
                 PotionEffect haste = player.getActivePotionEffect(Potion.digSpeed);
                 float swing = haste == null ? 0.16666667F : haste.getAmplifier() == 1 ? 0.5F : 0.4F;
@@ -118,14 +115,7 @@ public class ItemDivineSword extends ItemSword {
                     weaponEffect(stack, player);
                 }
             }
-            else {
-                //Weapon does nothing for a mortal
-                if(stack.isItemEnchanted()) {
-                    stack.stackTagCompound = null;
-                }
-            }
         }
-
     }
 
     private void weaponEffect(ItemStack stack, EntityPlayer player) {

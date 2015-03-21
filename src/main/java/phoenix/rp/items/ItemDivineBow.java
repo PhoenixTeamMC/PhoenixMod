@@ -3,14 +3,20 @@ package phoenix.rp.items;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import phoenix.main.PheonixMod;
 import phoenix.rp.entity.EntityDivineProjectile;
 import phoenix.rp.reference.Reference;
+import phoenix.rp.utility.DivinityHelper;
 
 public class ItemDivineBow extends ItemBow{
     private EnumRarity rarity;
@@ -59,7 +65,19 @@ public class ItemDivineBow extends ItemBow{
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+        if(DivinityHelper.isGod(player)) {
+            player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+        } else {
+            player.addChatComponentMessage(new ChatComponentText("info.renascintis.youAreNotWorthy"));
+        }
         return stack;
+    }
+
+    @Override
+    public void onUpdate(ItemStack stack, World world, Entity entity, int nr, boolean flag) {
+        if(entity !=null && entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entity;
+            DivinityHelper.enchantWeapon(stack, player, Enchantment.punch, 10);
+        }
     }
 }

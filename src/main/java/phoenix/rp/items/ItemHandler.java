@@ -14,7 +14,7 @@ public class ItemHandler
     public static final ItemR wand = new ItemGhastWand();
     public static final ItemSword genesis = new ItemDivineSword(mat, "genesis", 0);
     public static final ItemSword apocalypse = new ItemDivineSword(mat, "apocalypse", 1);
-    public static final ItemBow bow = new ItemDivineBow("bow");
+    public static final ItemBow libratumArcus = new ItemDivineBow("libratumArcus");
 
     public static void init()
     {
@@ -22,6 +22,6 @@ public class ItemHandler
         GameRegistry.registerItem(wand, "ghastWand");
         GameRegistry.registerItem(apocalypse, "apocalypse");
         GameRegistry.registerItem(genesis, "genesis");
-        GameRegistry.registerItem(bow, "bow");
+        GameRegistry.registerItem(libratumArcus, "bow");
     }
 }
