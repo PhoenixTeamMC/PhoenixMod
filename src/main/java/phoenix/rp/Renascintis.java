@@ -17,6 +17,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import phoenix.rp.handler.ConfigurationHandler;
 import phoenix.rp.items.ItemHandler;
 import phoenix.rp.potion.PotionHandler;
+import phoenix.main.proxy.IProxy;
 
 import java.io.File;
 
@@ -48,7 +49,7 @@ public class Renascintis implements IIntializer{
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
-
+        PheonixMod.proxy.registerRenaRenderers();
 	}
 	
 	ItemRP itemMaterial;

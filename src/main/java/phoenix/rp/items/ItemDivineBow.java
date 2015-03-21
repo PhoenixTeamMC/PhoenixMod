@@ -57,7 +57,7 @@ public class ItemDivineBow extends ItemBow{
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int time) {
         if(!world.isRemote) {
-            world.spawnEntityInWorld(new EntityDivineProjectile(player));
+            world.spawnEntityInWorld(new EntityDivineProjectile(player, EntityDivineProjectile.LIBRATUM_ARCUS_ID));
         }
     }
 

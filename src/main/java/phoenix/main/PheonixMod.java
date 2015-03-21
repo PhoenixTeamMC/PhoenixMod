@@ -3,6 +3,7 @@ package phoenix.main;
 import java.util.HashMap;
 import java.util.Map;
 
+import cpw.mods.fml.common.SidedProxy;
 import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.Logger;
@@ -11,6 +12,7 @@ import phoenix.command.CommandInit;
 import phoenix.filter.Filter;
 import phoenix.lib.GuiHandler;
 import phoenix.main.lib.Reference;
+import phoenix.main.proxy.IProxy;
 import phoenix.pathfinder.Pathfinder;
 import phoenix.rain.RainInit;
 import phoenix.rp.Renascintis;
@@ -39,7 +41,10 @@ public class PheonixMod {
 	
 	@Instance(Reference.MODID)
 	public static PheonixMod instance;
-	
+
+    @SidedProxy(clientSide = "phoenix.main.proxy.ClientProxy", serverSide = "phoenix.main.proxy.ServerProxy")
+    public static IProxy proxy;
+
 	public static final PheonixCreativeTab creativeTab = new PheonixCreativeTab();
 	
 	public Logger log;

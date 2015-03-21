@@ -124,7 +124,7 @@ public class ItemDivineSword extends ItemSword {
             case -1:
                 return;
             case ID_GENESIS:
-                player.worldObj.spawnEntityInWorld(new EntityDivineProjectile(player));
+                player.worldObj.spawnEntityInWorld(new EntityDivineProjectile(player, EntityDivineProjectile.GENESIS_ID));
                 return;
             case ID_APOCALYPSE:
                 return;

@@ -11,9 +11,15 @@ import phoenix.rp.utility.NBTHelper;
 public class EntityDivineProjectile extends EntityThrowable{
     private static final int LIFETIME = 60;
     private int counter = 0;
+    public int id;
 
-    public EntityDivineProjectile(EntityPlayer player) {
+    public static final int GENESIS_ID = 0;
+    public static final int APOCALYPSE_ID = 1;
+    public static final int LIBRATUM_ARCUS_ID = 2;
+
+    public EntityDivineProjectile(EntityPlayer player, int id) {
         super(player.getEntityWorld(), player);
+        this.id = id;
     }
 
     @Override
