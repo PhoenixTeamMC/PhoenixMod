@@ -11,11 +11,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.ChatComponentText;
 import phoenix.main.PheonixMod;
+import phoenix.rp.entity.EntityGenesisProjectile;
 import phoenix.rp.reference.Reference;
 import phoenix.rp.utility.DivinityHelper;
 
 public class ItemDivineSword extends ItemSword {
-    private static final int ID_PROJECTILE = 0;
+    private static final int ID_GENESIS = 0;
+    private static final int ID_APOCALYPSE = 1;
 
     private int effectId = -1;
     private EnumRarity rarity;
@@ -98,12 +100,15 @@ public class ItemDivineSword extends ItemSword {
 
     private void weaponEffect(ItemStack stack, EntityPlayer player, Entity entity) {
         switch(this.effectId) {
-            case -1: return;
-            case ID_PROJECTILE: fireProjectile(player);
+            //no effect
+            case -1:
+                return;
+            case ID_GENESIS:
+                player.worldObj.spawnEntityInWorld(new EntityGenesisProjectile(player));
+                return;
+            case ID_APOCALYPSE:
+                return;
         }
     }
 
-    private void fireProjectile(EntityPlayer player) {
-
-    }
 }

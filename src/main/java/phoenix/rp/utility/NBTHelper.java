@@ -5,6 +5,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class NBTHelper
 {
+    public static final String NBT_PLAYER = "PR_player";
+    public static final String NBT_COUNTER = "PR_player";
+
     public static boolean hasTag(ItemStack itemStack, String keyName)
     {
         return itemStack != null && itemStack.stackTagCompound != null && itemStack.stackTagCompound.hasKey(keyName);
