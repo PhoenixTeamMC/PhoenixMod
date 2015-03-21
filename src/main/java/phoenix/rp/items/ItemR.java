@@ -2,6 +2,7 @@ package phoenix.rp.items;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import phoenix.main.PheonixMod;
 import phoenix.rp.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,6 +15,7 @@ public class ItemR extends Item
     {
         super();
         this.setCreativeTab(CreativeTabs.tabCombat);
+        this.setCreativeTab(PheonixMod.creativeTab);
     }
 
     @Override

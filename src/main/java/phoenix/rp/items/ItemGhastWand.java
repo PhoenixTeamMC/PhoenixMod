@@ -1,5 +1,6 @@
 package phoenix.rp.items;
 
+import phoenix.main.PheonixMod;
 import phoenix.rp.utility.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityLargeFireball;
@@ -17,6 +18,7 @@ public class ItemGhastWand extends ItemR
         super();
         this.setUnlocalizedName("ghastWand");
         this.setMaxStackSize(1);
+        this.setCreativeTab(PheonixMod.creativeTab);
     }
 
     @Override

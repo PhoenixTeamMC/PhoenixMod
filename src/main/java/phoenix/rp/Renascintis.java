@@ -36,11 +36,6 @@ public class Renascintis implements IIntializer{
 		ConfigurationHandler.init(new File(event.getModConfigurationDirectory(), getModuleName()+".cfg"));
 		FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
 
-		for (int i = 0; i < ConfigSettings.types.length && i < ConfigSettings.playerList.length; i++)
-		{
-			Reference.godMap.put(ConfigSettings.types[i], ConfigSettings.playerList[i]);
-		}
-
 		ItemHandler.init();
 		PotionHandler.init();
 
@@ -52,7 +47,7 @@ public class Renascintis implements IIntializer{
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(new LivingHandler());
+		//MinecraftForge.EVENT_BUS.register(new LivingHandler());
 	}
 
 	@Override

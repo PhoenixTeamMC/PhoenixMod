@@ -12,6 +12,9 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
 public class LivingHandler
 {
+    //Not sure why this is done with the event, can be done much cleaner and efficiently from inside the weapon's class
+
+    /*
     private static EntityPlayer prevPlayer;
     private static EntityPlayer player1;
     private static int d = 0;
@@ -22,10 +25,12 @@ public class LivingHandler
         EntityPlayer player = (EntityPlayer)event.entity;
         if (event.target instanceof EntityPlayer) {
             EntityPlayer target = (EntityPlayer) event.target;
-            for (int i = 0; i < ConfigSettings.playerList.length; i++) {
-                if (target.getDisplayName().equals(ConfigSettings.playerList[i]) && !(player.getDisplayName()).equals(ConfigSettings.playerList[i])) {
+            for (int i = 0; i < ConfigSettings.godsList.length; i++) {
+                //target is god, player is not
+                if (target.getDisplayName().equals(ConfigSettings.godsList[i]) && !(player.getDisplayName()).equals(ConfigSettings.godsList[i])) {
+                    //target has the potioneffect
                     if (target.isPotionActive(PotionHandler.multipleAttackers)) {
-                        if (player != prevPlayer && player != player1 || player.getDisplayName().equals(ConfigSettings.playerList[i])) {
+                        if (player != prevPlayer && player != player1 || player.getDisplayName().equals(ConfigSettings.godsList[i])) {
                             EntityPlayer player2 = prevPlayer;
                             prevPlayer = player;
                             player1 = player2;
@@ -39,10 +44,10 @@ public class LivingHandler
             }
         }
 
-        for (int j = 0; j < ConfigSettings.playerList.length; j++)
+        for (int j = 0; j < ConfigSettings.godsList.length; j++)
         {
             LogHelper.info("went through for loop name: " + player.getDisplayName());
-            if (player.getDisplayName().equals(ConfigSettings.playerList[j]))
+            if (player.getDisplayName().equals(ConfigSettings.godsList[j]))
             {
                 LogHelper.info(player.getDisplayName() + " is god");
                 if (player.getHeldItem() != null) {
@@ -61,4 +66,5 @@ public class LivingHandler
             }
         }
     }
+    */
 }
