@@ -11,16 +11,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import phoenix.rp.utility.DivinityHelper;
+import phoenix.rp.utility.LogHelper;
 import phoenix.rp.utility.NBTHelper;
 
-public class EntityGenesisProjectile extends EntityThrowable{
+public class EntityDivineProjectile extends EntityThrowable{
     private static final int LIFETIME = 200;
     private String origin;
     private int counter = 0;
 
-    public EntityGenesisProjectile(EntityPlayer player) {
+    public EntityDivineProjectile(EntityPlayer player) {
         super(player.getEntityWorld());
         this.origin = player.getDisplayName();
+        LogHelper.info(origin + " spawned projectile");
         this.setSize(0F, 0F);
 
         //Grabbed from Botania code as I was too lazy to figure the numbers out myself, so kudos to Vazkii
@@ -38,11 +40,12 @@ public class EntityGenesisProjectile extends EntityThrowable{
 
     public EntityPlayer getOrigin() {
         Side side = FMLCommonHandler.instance().getEffectiveSide();
-        if(side==Side.CLIENT) {
-            return FMLClientHandler.instance().getClientPlayerEntity();
+        LogHelper.info("Origin: "+origin);
+        if(side==Side.SERVER) {
+            return FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152612_a(origin);
         }
         else {
-            return FMLServerHandler.instance().getServer().getConfigurationManager().func_152612_a(origin);
+            return FMLClientHandler.instance().getClientPlayerEntity();
         }
     }
 

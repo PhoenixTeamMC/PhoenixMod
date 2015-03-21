@@ -3,15 +3,19 @@ package phoenix.rp.items;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.world.World;
 import phoenix.main.PheonixMod;
-import phoenix.rp.entity.EntityGenesisProjectile;
+import phoenix.rp.entity.EntityDivineProjectile;
 import phoenix.rp.reference.Reference;
 import phoenix.rp.utility.DivinityHelper;
 
@@ -90,7 +94,7 @@ public class ItemDivineSword extends ItemSword {
         //Attacker is not a god: weapon does nothing
         else {
             /*
-            DivinityHelper.spawnLightningAt(attacker.getEntityWorld(), attacker.posX, attacker.posY, attacker.posZ);
+            DivinityHelper.spawnLightningAt(azttacker.getEntityWorld(), attacker.posX, attacker.posY, attacker.posZ);
             attacker.dropOneItem(true);
             */
             attacker.addChatComponentMessage(new ChatComponentText("Phoenix.PR.youAreNotWorthy"));
@@ -98,13 +102,39 @@ public class ItemDivineSword extends ItemSword {
         return true;
     }
 
-    private void weaponEffect(ItemStack stack, EntityPlayer player, Entity entity) {
+    @Override
+    public void onUpdate(ItemStack stack, World world, Entity entity, int nr, boolean flag) {
+        if(entity !=null && entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entity;
+            if(DivinityHelper.isGod(player)) {
+                // Weapon is enchanted in the hands of a god
+                if(!stack.isItemEnchanted()) {
+                    stack.addEnchantment(Enchantment.sharpness, 5);
+                }
+                //Check if the god is swinging his sword
+                PotionEffect haste = player.getActivePotionEffect(Potion.digSpeed);
+                float swing = haste == null ? 0.16666667F : haste.getAmplifier() == 1 ? 0.5F : 0.4F;
+                if(!world.isRemote && player.getCurrentEquippedItem()==stack && player.swingProgress==swing) {
+                    weaponEffect(stack, player);
+                }
+            }
+            else {
+                //Weapon does nothing for a mortal
+                if(stack.isItemEnchanted()) {
+                    stack.stackTagCompound = null;
+                }
+            }
+        }
+
+    }
+
+    private void weaponEffect(ItemStack stack, EntityPlayer player) {
         switch(this.effectId) {
             //no effect
             case -1:
                 return;
             case ID_GENESIS:
-                player.worldObj.spawnEntityInWorld(new EntityGenesisProjectile(player));
+                player.worldObj.spawnEntityInWorld(new EntityDivineProjectile(player));
                 return;
             case ID_APOCALYPSE:
                 return;
