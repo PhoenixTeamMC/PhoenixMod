@@ -3,7 +3,6 @@ package phoenix.rp.entity;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.server.FMLServerHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -40,7 +39,6 @@ public class EntityDivineProjectile extends EntityThrowable{
 
     public EntityPlayer getOrigin() {
         Side side = FMLCommonHandler.instance().getEffectiveSide();
-        LogHelper.info("Origin: "+origin);
         if(side==Side.SERVER) {
             return FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152612_a(origin);
         }

@@ -8,7 +8,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import phoenix.lib.item.ItemBase;
 import phoenix.main.IIntializer;
 import phoenix.main.PheonixMod;
@@ -16,11 +15,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import phoenix.rp.handler.ConfigurationHandler;
-import phoenix.rp.handler.LivingHandler;
 import phoenix.rp.items.ItemHandler;
 import phoenix.rp.potion.PotionHandler;
-import phoenix.rp.reference.ConfigSettings;
-import phoenix.rp.reference.Reference;
 
 import java.io.File;
 
@@ -47,12 +43,12 @@ public class Renascintis implements IIntializer{
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-		//MinecraftForge.EVENT_BUS.register(new LivingHandler());
+
 	}
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event) {
-		// TODO Auto-generated method stub
+
 	}
 	
 	ItemRP itemMaterial;
