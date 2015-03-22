@@ -6,11 +6,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import phoenix.rp.entity.EntityDivineProjectile;
 
-public class RenderDivineArrow extends Render {
-    private static final ResourceLocation arrowTexture = new ResourceLocation("textures/entity/arrow.png");
-    private static final ResourceLocation genesisTexture = new ResourceLocation("textures/entity/genesis.png");
+public class RenderGenesisProjectile extends Render {
+    private static final ResourceLocation texture = new ResourceLocation("textures/entity/genesis.png");
 
     @Override
     public void doRender(Entity entity, double x, double y, double z, float f1, float f2) {
@@ -69,10 +67,6 @@ public class RenderDivineArrow extends Render {
 
     @Override
     protected ResourceLocation getEntityTexture(Entity entity) {
-        EntityDivineProjectile projectile = (EntityDivineProjectile) entity;
-        switch(projectile.id) {
-            case EntityDivineProjectile.GENESIS_ID: return genesisTexture;
-            default: return arrowTexture;
-        }
+       return texture;
     }
 }

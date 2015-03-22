@@ -8,18 +8,12 @@ import net.minecraft.util.MovingObjectPosition;
 import phoenix.rp.utility.DivinityHelper;
 import phoenix.rp.utility.NBTHelper;
 
-public class EntityDivineProjectile extends EntityThrowable{
+public class EntityGenesisProjectile extends EntityThrowable{
     private static final int LIFETIME = 60;
     private int counter = 0;
-    public int id;
 
-    public static final int GENESIS_ID = 0;
-    public static final int APOCALYPSE_ID = 1;
-    public static final int LIBRATUM_ARCUS_ID = 2;
-
-    public EntityDivineProjectile(EntityPlayer player, int id) {
+    public EntityGenesisProjectile(EntityPlayer player) {
         super(player.getEntityWorld(), player);
-        this.id = id;
     }
 
     @Override

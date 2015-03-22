@@ -15,7 +15,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import phoenix.main.PheonixMod;
-import phoenix.rp.entity.EntityDivineProjectile;
+import phoenix.rp.entity.EntityGenesisProjectile;
 import phoenix.rp.reference.Reference;
 import phoenix.rp.utility.DivinityHelper;
 
@@ -124,7 +124,7 @@ public class ItemDivineSword extends ItemSword {
             case -1:
                 return;
             case ID_GENESIS:
-                player.worldObj.spawnEntityInWorld(new EntityDivineProjectile(player, EntityDivineProjectile.GENESIS_ID));
+                player.worldObj.spawnEntityInWorld(new EntityGenesisProjectile(player));
                 return;
             case ID_APOCALYPSE:
                 return;
